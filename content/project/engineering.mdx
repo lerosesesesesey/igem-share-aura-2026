@@ -1,0 +1,91 @@
+<Section id="overview" title="Engineering overview" kicker="01">
+
+AURA's engineering story is organised around five Design–Build–Test–Learn (DBTL) cycles. The system is not one isolated sensor: target selection, surface chemistry, transistor response, signal processing, fluidics, and the user alert all have to work together.
+
+<Callout variant="note" title="How to read this page">
+  These cycles describe design intent and the tests needed to validate it. Where results are still pending, we say so explicitly.
+</Callout>
+
+</Section>
+
+<Section id="cycle-1" title="Cycle 1 - microRNA target" kicker="02">
+
+**Design.** Survey mastitis-associated microRNAs reported in milk and rank them by timing, effect size, specificity, stability, and evidence quality.
+
+**Build.** Create a decision matrix and define the concentration range the sensor would need to distinguish from healthy-milk background.
+
+**Test.** Compare candidate ranges across published datasets and plan validation against characterised milk samples.
+
+**Learn.** The target is only useful if it appears early enough, survives the milk matrix, and can be recognised selectively at a realistic threshold.
+
+</Section>
+
+<Section id="cycle-2" title="Cycle 2 - recognition surface" kicker="03">
+
+**Design.** Select a capture probe complementary to the target microRNA and a surface attachment strategy compatible with the BioFET gate.
+
+**Build.** Functionalise test surfaces with the probe and include scrambled-sequence, non-target, and blank controls.
+
+**Test.** Measure target binding in buffer and in progressively more realistic milk matrices.
+
+**Learn.** Milk fouling and non-specific adsorption may dominate the useful signal. Surface blocking, sample preparation, and regeneration therefore have to be designed with the probe rather than added later.
+
+<Placeholder label="Probe selectivity and milk-matrix data - pending" />
+
+</Section>
+
+<Section id="cycle-3" title="Cycle 3 - BioFET response" kicker="04">
+
+**Design.** Convert target binding at the gate surface into a stable electrical response with enough separation between healthy and target-positive samples.
+
+**Build.** Couple the functionalised surface to the transistor and analogue front end; define reference measurements and electrical controls.
+
+**Test.** Characterise response magnitude, noise, drift, dynamic range, repeatability, and limit of detection across the planned microRNA concentration range.
+
+**Learn.** A strong signal is not sufficient if baseline drift or device-to-device variation is larger. Calibration and reference channels are part of the sensor, not post-processing extras.
+
+<Placeholder label="BioFET calibration and response curves - pending" />
+
+</Section>
+
+<Section id="cycle-4" title="Cycle 4 - threshold and alert" kicker="05">
+
+**Design.** Translate the electrical response into an interpretable risk flag for a farmer or vet. The output must communicate uncertainty and device status, not present an unvalidated diagnosis.
+
+**Build.** Implement signal conditioning, quality checks, a provisional decision threshold, and a phone/computer alert interface.
+
+**Test.** Challenge the logic with noisy traces, negative controls, sensor faults, and blinded samples; record false alerts and missed signals.
+
+**Learn.** The alert needs three states - no flag, review, and invalid sensor - so a hardware problem is never mistaken for a healthy result.
+
+</Section>
+
+<Section id="cycle-5" title="Cycle 5 - inline integration" kicker="06">
+
+**Design.** Combine milk flow, sensing, electronics, and alert delivery into one workflow that fits milking without contaminating or delaying the milk line.
+
+**Build.** Prototype a cleanable or replaceable sensing cartridge, isolate wet and dry components, and connect each reading to the correct cow or line.
+
+**Test.** Run end-to-end trials across flow rate, temperature, cleaning cycles, milk composition, and repeated measurements; compare results with reference veterinary methods.
+
+**Learn.** Integration exposes failure modes that bench tests cannot: fouling, timing, traceability, cleaning, and user interpretation. These results set the agenda for later field validation.
+
+<Callout variant="safety" title="Scope reminder">
+  AURA is diagnostic support, not a diagnosis. An alert is intended to prompt a closer check and veterinary assessment, not replace them.
+</Callout>
+
+</Section>
+
+<Section id="dbtl" title="The DBTL wheel" kicker="07">
+
+<div className="not-prose -mx-4 sm:-mx-8">
+  <DbtlWheel />
+</div>
+
+</Section>
+
+<Section id="pipeline" title="From milk to signal" kicker="08">
+
+The engineering backbone is direct: **milk flow → microRNA recognition → BioFET response → signal processing → phone or computer alert → veterinary follow-up when needed**. Every DBTL cycle strengthens one link without losing sight of the complete workflow.
+
+</Section>

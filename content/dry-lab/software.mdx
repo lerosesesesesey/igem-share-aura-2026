@@ -1,0 +1,35 @@
+<Section id="overview" title="Software overview" kicker="01">
+
+Software supports signal processing, calibration, documentation, and delivery of an alert. The critical path should be able to run locally at the parlour; a cloud connection must not be required to recognise or display a warning.
+
+</Section>
+
+<Section id="analysis" title="Analysis scripts" kicker="02">
+
+Analysis notebooks process BioFET voltage or current traces, remove documented baseline drift, fit calibration curves, and estimate uncertainty around the proposed decision threshold.
+
+<Placeholder label="Repository link and example notebook - pending" />
+
+</Section>
+
+<Section id="wiki" title="This wiki" kicker="03">
+
+The site is a static Next.js export - fast, deployable to iGEM hosting, accessible without JavaScript for core content. MDX pages keep prose editable without touching layout code.
+
+</Section>
+
+<Section id="reader-app" title="Alert interface" kicker="04">
+
+A minimal mobile-friendly interface can receive a device result, show which cow or milk line needs attention, and archive the timestamp and sensor status. Privacy and data ownership remain farm-controlled; no cloud requirement is assumed for the first version.
+
+<Callout variant="note" title="Scope">
+  Alert delivery is part of the concept, but the interface and decision threshold still require validation with users and reference measurements.
+</Callout>
+
+</Section>
+
+<Section id="license" title="Licence" kicker="05">
+
+Code released under an open licence with README describing dependencies and how to reproduce figures. Uncalibrated model code is labelled as such.
+
+</Section>

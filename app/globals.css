@@ -1,0 +1,321 @@
+@import "tailwindcss";
+
+/*
+  AURA - iGEM 2025 design system
+  "prestige biotech wiki meets indie teen science film"
+  Milk is quiet. Infection is not.
+*/
+
+@theme {
+  /* --- Core surfaces --- */
+  --color-milk: #f6eee0; /* warm dairy ivory */
+  --color-cream: #eadfcb; /* deeper milk */
+  --color-ink: #1c140f; /* warm chocolate-black */
+  --color-ink-2: #261c16;
+  --color-ink-3: #32251e;
+  --color-slate: #4a3b32;
+
+  /* --- Brand: dusty rose + quiet teal (not electric) --- */
+  --color-pink: #e45b88;
+  --color-pink-soft: #f09bb4;
+  --color-pink-deep: #c4456e;
+  --color-signal: #5aaeb8;
+  --color-signal-deep: #3d8a93;
+
+  /* --- Warm softeners: orange + butter --- */
+  --color-orange: #ff8a4c; /* warm orange */
+  --color-butter: #f7c65a; /* dairy optimism / yellow */
+  --color-coral: #ff6f81; /* inflamed mastitis signal */
+  --color-coral-deep: #d63a55;
+  --color-bio: #46d19b; /* fresh biological green */
+  --color-warn: #ff5a2c; /* warning red-orange (sparse) */
+
+  /* --- Neutral text scale (on milk) --- */
+  --color-ink-70: rgba(28, 20, 15, 0.72);
+  --color-ink-55: rgba(28, 20, 15, 0.56);
+  --color-ink-40: rgba(28, 20, 15, 0.4);
+
+  /* --- Fonts (all sans-serif; no serif display, no monospace) --- */
+  --font-display: var(--font-space), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  /* Kept as a token for the label/eyebrow style - now sans, not mono. */
+  --font-mono: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+
+  /* --- Radius --- */
+  --radius-card: 1.25rem;
+
+  /* --- Timing --- */
+  --ease-out-soft: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+:root {
+  --background: var(--color-milk);
+  --foreground: var(--color-ink);
+  color-scheme: light;
+}
+
+* {
+  border-color: color-mix(in srgb, var(--color-ink) 12%, transparent);
+}
+
+html {
+  scroll-behavior: auto;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: var(--color-milk);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  font-feature-settings: "ss01", "cv01";
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Selection */
+::selection {
+  background: color-mix(in srgb, var(--color-pink-soft) 45%, transparent);
+  color: var(--color-ink);
+}
+
+/* Focus ring - accessible keyboard states */
+:where(a, button, [role="button"], input, select, textarea, summary):focus-visible {
+  outline: 2px solid var(--color-pink-deep);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* Dark section utility: flips the surface to midnight */
+.section-dark {
+  background: var(--color-ink);
+  color: var(--color-milk);
+  --foreground: var(--color-milk);
+}
+.section-dark ::selection {
+  background: color-mix(in srgb, var(--color-pink-soft) 40%, transparent);
+  color: var(--color-milk);
+}
+
+/* Display type helpers */
+.font-display {
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+}
+
+.text-balance {
+  text-wrap: balance;
+}
+.text-pretty {
+  text-wrap: pretty;
+}
+
+/* Fluid display sizes. */
+.display-hero {
+  font-size: clamp(2.75rem, 8vw, 7rem);
+  line-height: 1;
+  padding-bottom: 0.04em;
+}
+.display-1 {
+  font-size: clamp(2.25rem, 5vw, 4rem);
+  line-height: 1.05;
+  padding-bottom: 0.04em;
+}
+.display-2 {
+  font-size: clamp(1.6rem, 3.2vw, 2.6rem);
+  line-height: 1.12;
+  padding-bottom: 0.04em;
+}
+
+/* Quiet label - same weight as body, no wide tracking, no shout. */
+.kicker {
+  font-family: var(--font-sans);
+  font-weight: 550;
+  font-size: 0.8rem;
+  letter-spacing: 0.01em;
+}
+
+/* Thin hairline grid background (farm grid -> lab grid motif) */
+.bg-grid {
+  background-image:
+    linear-gradient(color-mix(in srgb, currentColor 8%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in srgb, currentColor 8%, transparent) 1px, transparent 1px);
+  background-size: 44px 44px;
+}
+
+/* Milk-glass card */
+.glass {
+  background: color-mix(in srgb, var(--color-milk) 6%, transparent);
+  backdrop-filter: blur(14px);
+  border: 1px solid color-mix(in srgb, var(--color-milk) 14%, transparent);
+}
+
+/* Signal glow (cyan) */
+.glow-signal {
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--color-signal) 40%, transparent),
+    0 0 40px -8px color-mix(in srgb, var(--color-signal) 60%, transparent);
+}
+/* Pink glow */
+.glow-pink {
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--color-pink) 40%, transparent),
+    0 0 44px -8px color-mix(in srgb, var(--color-pink) 65%, transparent);
+}
+
+/*
+  THE AURA - signature soft radial bloom (from the hoodie reference).
+  Pink core → warm orange/butter mid → cyan halo, fading to nothing.
+  Use as a background layer behind hero content on dark surfaces.
+*/
+.aura-bloom {
+  background:
+    radial-gradient(
+      42% 42% at 50% 45%,
+      color-mix(in srgb, var(--color-pink) 92%, white) 0%,
+      var(--color-pink) 22%,
+      color-mix(in srgb, var(--color-coral) 90%, var(--color-orange)) 44%,
+      color-mix(in srgb, var(--color-orange) 70%, transparent) 60%,
+      color-mix(in srgb, var(--color-butter) 30%, transparent) 72%,
+      transparent 84%
+    );
+  filter: blur(6px);
+}
+/* Cyan counter-bloom, used offset behind the pink for depth */
+.aura-bloom-cyan {
+  background: radial-gradient(
+    40% 40% at 50% 50%,
+    color-mix(in srgb, var(--color-signal) 85%, white) 0%,
+    var(--color-signal) 30%,
+    color-mix(in srgb, var(--color-signal) 40%, transparent) 58%,
+    transparent 78%
+  );
+  filter: blur(10px);
+}
+
+/* Rose, not a rainbow gradient */
+.text-aura {
+  color: var(--color-pink-soft);
+}
+/* Quiet teal → rose, used sparingly on the readout */
+.text-duo {
+  color: var(--color-pink);
+}
+
+@keyframes accordion-down {
+  from { height: 0; }
+  to { height: var(--radix-accordion-content-height); }
+}
+@keyframes accordion-up {
+  from { height: var(--radix-accordion-content-height); }
+  to { height: 0; }
+}
+
+@keyframes aura-breathe {
+  0%, 100% { transform: scale(1); opacity: 0.9; }
+  50% { transform: scale(1.08); opacity: 1; }
+}
+.animate-aura { animation: aura-breathe 8s var(--ease-out-soft) infinite; }
+
+/* Custom scrollbar (subtle) */
+@media (pointer: fine) {
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: color-mix(in srgb, var(--color-ink) 25%, transparent);
+    border-radius: 999px;
+    border: 3px solid transparent;
+    background-clip: padding-box;
+  }
+}
+
+/* --- Keyframes for SVG / ambient motion --- */
+@keyframes drift {
+  0% { transform: translateY(0) translateX(0); }
+  50% { transform: translateY(-14px) translateX(6px); }
+  100% { transform: translateY(0) translateX(0); }
+}
+@keyframes pulse-ring {
+  0% { transform: scale(0.9); opacity: 0.8; }
+  70% { transform: scale(1.6); opacity: 0; }
+  100% { opacity: 0; }
+}
+@keyframes dash-flow {
+  to { stroke-dashoffset: -1000; }
+}
+@keyframes shimmer {
+  100% { transform: translateX(100%); }
+}
+
+.animate-drift { animation: drift 9s var(--ease-out-soft) infinite; }
+
+/* Herd idle: animates `translate` only so it composes with flips (`scale`) and marks (`transform`). */
+@keyframes herd-breathe {
+  0%, 100% { translate: 0 0; }
+  50% { translate: 0 -3%; }
+}
+.animate-herd-breathe { animation: herd-breathe 5.6s ease-in-out infinite; }
+
+@keyframes milk-fall {
+  0% { transform: translate3d(0, -14vh, 0); }
+  100% { transform: translate3d(var(--drift, 0px), 112vh, 0); }
+}
+
+@keyframes milk-pour {
+  0% { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(var(--drift, 0px), 110vh, 0); }
+}
+
+@keyframes milk-wave {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.animate-milk-wave {
+  animation: milk-wave 2.8s linear infinite;
+}
+
+/* Flat wash behind a character: a slow, small breathe - no blur, no opacity pulse. */
+@keyframes art-glow {
+  0%, 100% { transform: translate(-50%, -50%) rotate(-3deg) scale(1); }
+  50% { transform: translate(-50%, -50%) rotate(3deg) scale(1.05); }
+}
+.animate-art-glow { animation: art-glow 7s ease-in-out infinite; }
+
+/* Picture-book page: irregular paper, ink edge, a little grain. */
+.painted {
+  position: relative;
+  background-color: #fffdf2;
+  background-image:
+    radial-gradient(circle at 18% 8%, color-mix(in srgb, var(--color-pink) 7%, transparent), transparent 42%),
+    radial-gradient(circle at 92% 88%, color-mix(in srgb, var(--color-signal) 6%, transparent), transparent 38%),
+    repeating-radial-gradient(circle at 20% 30%, rgba(7, 5, 16, 0.025) 0 1px, transparent 1px 3px);
+  border-radius: 18px 24px 16px 22px;
+  box-shadow:
+    2px 3px 0 0 rgba(7, 5, 16, 0.07),
+    0 0 0 2px rgba(7, 5, 16, 0.16),
+    0 16px 36px -18px rgba(7, 5, 16, 0.18);
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar { display: none; }
+
+.article-paper {
+  background-image:
+    radial-gradient(circle at 100% 0%, color-mix(in srgb, var(--color-pink) 8%, transparent), transparent 36%),
+    radial-gradient(circle at 0% 100%, color-mix(in srgb, var(--color-signal) 7%, transparent), transparent 32%);
+}
+
+/* Reduced motion: turn off ambient + smooth scroll */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
